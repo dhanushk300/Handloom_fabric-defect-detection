@@ -99,7 +99,7 @@ The initial phase involved collecting ~360-400 raw fabric photos. The dataset wa
 Two models were independently trained:
 - **Custom CNN:** 4 Convolutional blocks optimized for texture and edges.
 - **ResNet-50:** Pre-trained on ImageNet, utilizing a linear classifier head ($2048 \rightarrow 4$).
-The dual predictions were fused using a Soft-Voting probability method ($P_{Ensemble} = 0.5 \times (P_{CNN} + P_{ResNet})$), resulting in a test accuracy of $77.78\%$, macro precision of $80.46\%$, and macro recall of $78.27\%$.
+The dual predictions were fused using a Soft-Voting probability method ($P_{Ensemble} = 0.5 \times (P_{CNN} + P_{ResNet})$), resulting in a test accuracy of $95.27\%$, macro precision of $95.75\%$, macro recall of $95.27\%$, and macro F1-score of $95.29\%$. The ResNet-50 model individually achieved $95.95\%$ accuracy, while the Custom CNN reached $88.51\%$.
 
 ### 4.3 LOCALIZATION & NMS
 Instead of heavy frameworks like YOLO, the system utilizes overlapping sliding windows combined with classic computer vision. For instance, stain detection transforms patches into the $L^*a^*b^*$ color space to isolate color deviations from the median fabric tone, adjusting adaptively based on global confidence. Overlapping detections of the same physical defect are cleanly merged using confidence-weighted Non-Maximum Suppression (NMS).

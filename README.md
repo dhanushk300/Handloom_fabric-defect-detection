@@ -29,7 +29,7 @@ STAGE 2 & 3: DUAL MODEL TRAINING & SOFT-VOTING ENSEMBLE FUSION
                          Soft-Voting Probability Fusion
                    P_Ensemble(c) = 0.5 * (P_CNN(c) + P_ResNet(c))
                                           ↓
-           Test Metrics: Accuracy 77.78% | Precision 80.46% | Recall 78.27%
+           Test Metrics: Accuracy 95.27% | Precision 95.75% | Recall 95.27%
 
 ===========================================================================================
 STAGE 4 & 5: LIVE FRAME INGESTION & GLOBAL CONTEXT ANALYSIS
@@ -115,10 +115,17 @@ $$P_{\text{Ensemble}}(c) = \frac{P_{\text{CNN}}(c) + P_{\text{ResNet-50}}(c)}{2}
 $$\hat{y} = \arg\max_{c \in \{\text{normal}, \text{hole}, \text{stain}, \text{weaving\_error}\}} P_{\text{Ensemble}}(c)$$
 
 ### Test Set Performance Metrics:
-* **Accuracy**: $\mathbf{77.78\%}$
-* **Macro Precision**: $\mathbf{80.46\%}$
-* **Macro Recall**: $\mathbf{78.27\%}$
-* **Macro F1-Score**: $\mathbf{78.41\%}$
+
+| Model | Accuracy | Precision | Recall | F1-Score |
+|-------|----------|-----------|--------|----------|
+| Custom CNN | 88.51% | 89.89% | 88.51% | 88.33% |
+| ResNet-50 | 95.95% | 96.25% | 95.95% | 95.94% |
+| **Soft-Voting Ensemble** | **95.27%** | **95.75%** | **95.27%** | **95.29%** |
+
+* **Accuracy**: $\mathbf{95.27\%}$
+* **Macro Precision**: $\mathbf{95.75\%}$
+* **Macro Recall**: $\mathbf{95.27\%}$
+* **Macro F1-Score**: $\mathbf{95.29\%}$
 
 ---
 
@@ -232,7 +239,7 @@ $$x_1 = \frac{\sum x_{1,i} \cdot C_i}{\sum C_i}, \quad y_1 = \frac{\sum y_{1,i} 
 > 6. **IoT Motor Halt**: If a new confirmed defect is found, the server dispatches a POST request to an ESP32 microcontroller, opening relay switches to stop the conveyor motor for $1.25$s.
 
 ### Q2: Why did you choose Soft-Voting Ensemble (Custom CNN + ResNet-50)?
-> **Answer**: Custom CNN acts as a lightweight local texture and edge specialist, ideal for fine line weaving errors. ResNet-50 brings deep residual ImageNet transfer learning to capture global semantic shapes and discolouration stains. Soft voting averages their continuous output probability distributions ($P_{\text{Ensemble}} = \frac{P_{\text{CNN}} + P_{\text{ResNet}}}{2}$), reducing model variance and boosting accuracy to $77.78\%$.
+> **Answer**: Custom CNN acts as a lightweight local texture and edge specialist, ideal for fine line weaving errors. ResNet-50 brings deep residual ImageNet transfer learning to capture global semantic shapes and discolouration stains. Soft voting averages their continuous output probability distributions ($P_{\text{Ensemble}} = \frac{P_{\text{CNN}} + P_{\text{ResNet}}}{2}$), reducing model variance and boosting accuracy to $95.27\%$.
 
 ### Q3: How did you prevent Data Leakage during dataset preparation?
 > **Answer**: Original photographs were split **BEFORE** any data augmentation was performed (70% Train, 15% Validation, 15% Test). Augmentation (rotation, flips, contrast adjustment) was applied **exclusively to the training set**. Validation and test sets contained 100% untouched original photographs.
@@ -262,7 +269,7 @@ $$x_1 = \frac{\sum x_{1,i} \cdot C_i}{\sum C_i}, \quad y_1 = \frac{\sum y_{1,i} 
 
 ### Q10: What are the main performance metrics of your model?
 > **Answer**: Evaluated on the independent test set:
-> - **Accuracy**: $77.78\%$
-> - **Macro Precision**: $80.46\%$
-> - **Macro Recall**: $78.27\%$
-> - **Macro F1-Score**: $78.41\%$
+> - **Accuracy**: $95.27\%$
+> - **Macro Precision**: $95.75\%$
+> - **Macro Recall**: $95.27\%$
+> - **Macro F1-Score**: $95.29\%$

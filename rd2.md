@@ -22,10 +22,10 @@ models/resnet50_best.pth
 
 The current ensemble test result is:
 
-Accuracy: 77.78%
-Macro Precision: 80.46%
-Macro Recall: 78.27%
-Macro F1: 78.41%
+Accuracy: 95.27%
+Macro Precision: 95.75%
+Macro Recall: 95.27%
+Macro F1: 95.29%
 
 These are actual measured results from the untouched test set.
 
